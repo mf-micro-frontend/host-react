@@ -3,6 +3,7 @@ import Header from "./components/Header/Header.tsx";
 import React, { useEffect, useState } from "react";
 
 const BookList = React.lazy(() => import("bookList/App"));
+const SingleBook = React.lazy(() => import("singleBook/App"));
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -31,6 +32,9 @@ function App() {
         onRemoveItem={(bookId) => removeItemFromCart(bookId)}
         cart={cart}
       ></Header>
+      <div className="flex-1">
+        <SingleBook />
+      </div>
       <div className="flex-1">
         <BookList />
       </div>

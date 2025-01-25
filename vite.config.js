@@ -11,8 +11,8 @@ export default defineConfig({
     federation({
       name: "host",
       remotes: {
-        name: "bookList",
         bookList: "http://localhost:5002/assets/remoteEntry.js",
+        singleBook: "http://localhost:5003/assets/remoteEntry.js",
       },
       filename: "remoteEntry.js",
       shared: ["react", "react-dom", "tailwindcss"],
