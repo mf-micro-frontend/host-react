@@ -1,6 +1,8 @@
 import Footer from "./components/Footer/Footer.tsx";
 import Header from "./components/Header/Header.tsx";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+const BookList = React.lazy(() => import("bookList/App"));
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -29,7 +31,9 @@ function App() {
         onRemoveItem={(bookId) => removeItemFromCart(bookId)}
         cart={cart}
       ></Header>
-      <div>Place for other micro frontends</div>
+      <div className="flex-1">
+        <BookList />
+      </div>
       <Footer handleSearch={(value) => handleSearch(value)}></Footer>
     </div>
   );

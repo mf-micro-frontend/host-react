@@ -10,11 +10,19 @@ export default defineConfig({
     tailwindcss(),
     federation({
       name: "host",
-      remotes: {},
-      shared: ["react", "react-dom"],
+      remotes: {
+        name: "bookList",
+        bookList: "http://localhost:5002/assets/remoteEntry.js",
+      },
+      filename: "remoteEntry.js",
+      shared: ["react", "react-dom", "tailwindcss"],
     }),
   ],
+  build: {
+    target: "esnext",
+  },
   server: {
-    port: 5000,
+    port: 5001,
+    cors: true,
   },
 });
