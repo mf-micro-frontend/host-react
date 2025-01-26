@@ -26,16 +26,16 @@ function App() {
   const removeItemFromCart = (bookId) => {};
 
   return (
-    <div className="w-full h-screen overflow-y-scroll flex flex-col gap-16">
+    <div className="w-full h-screen overflow-y-scroll flex flex-col">
       <Header
         handleSearch={(value) => handleSearch(value)}
         onRemoveItem={(bookId) => removeItemFromCart(bookId)}
         cart={cart}
       ></Header>
-      <div className="flex-1">
+      <div className="flex-1 mt-4">
         <SingleBook />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 mt-8">
         <BookList />
       </div>
       <Footer handleSearch={(value) => handleSearch(value)}></Footer>
