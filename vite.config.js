@@ -10,6 +10,9 @@ export default defineConfig({
     tailwindcss(),
     federation({
       name: "host",
+      exposes: {
+        "./GlobalContext": "./src/context/GlobalContext.jsx",
+      },
       remotes: {
         bookList: "http://localhost:5002/assets/remoteEntry.js",
         singleBook: "http://localhost:5003/assets/remoteEntry.js",
