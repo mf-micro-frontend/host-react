@@ -1,32 +1,39 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-import federation from "@originjs/vite-plugin-federation";
 import tailwindcss from "@tailwindcss/vite";
+import federation from "@originjs/vite-plugin-federation";
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    federation({
-      name: "host",
-      exposes: {
-        "./GlobalContext": "./src/context/GlobalContext.jsx",
-      },
-      remotes: {
-        bookList: "http://localhost:5002/assets/remoteEntry.js",
-        singleBook: "http://localhost:5003/assets/remoteEntry.js",
-        shared: "http://localhost:5099/assets/remoteEntry.js",
-      },
-      filename: "remoteEntry.js",
-      shared: ["react", "react-dom", "tailwindcss"],
-    }),
-  ],
-  build: {
-    target: "esnext",
-  },
-  server: {
-    port: 5001,
-    cors: true,
-  },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  return {
+    plugins: [
+      react(),
+      tailwindcss(),
+      federation({
+        name: "host",
+        exposes: {
+          "./GlobalContext": "./src/context/GlobalContext.jsx",
+        },
+        remotes: {
+          bookList: `${env.VITE_BOOK_LIST_APP_URL}/assets/remoteEntry.js`,
+          singleBook: `${env.VITE_SINGLE_BOOK_APP_URL}/assets/remoteEntry.js`,
+          shared: `${env.VITE_SHARED_APP_URL}/assets/remoteEntry.js`,
+        },
+        filename: "remoteEntry.js",
+        shared: ["react", "react-dom", "tailwindcss"],
+      }),
+    ],
+    build: {
+      target: "esnext",
+    },
+    server: {
+      port: 5001,
+      cors: true,
+    },
+    define: {
+      // Inject environment variables into the app at build time
+      __APP_ENV__: JSON.stringify(env.APP_ENV),
+    },
+  };
 });
