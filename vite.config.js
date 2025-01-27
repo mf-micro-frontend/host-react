@@ -16,6 +16,7 @@ export default defineConfig({
       remotes: {
         bookList: "http://localhost:5002/assets/remoteEntry.js",
         singleBook: "http://localhost:5003/assets/remoteEntry.js",
+        shared: "http://localhost:5099/assets/remoteEntry.js",
       },
       filename: "remoteEntry.js",
       shared: ["react", "react-dom", "tailwindcss"],
