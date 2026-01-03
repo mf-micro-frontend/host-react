@@ -1,9 +1,12 @@
-//@ts-nocheck
-
 import { FaTrash } from "react-icons/fa";
-import PropTypes from "prop-types";
+import { CartItem } from "../../context/GlobalContext";
 
-const CartDropdown = ({ cart, onRemoveItem }) => {
+interface CartDropdownProps {
+  cart: CartItem[];
+  onRemoveItem: (bookId: string) => void;
+}
+
+const CartDropdown: React.FC<CartDropdownProps> = ({ cart, onRemoveItem }) => {
   return (
     <div className="absolute right-10 top-4 mt-2 bg-white border border-gray-300 shadow-lg w-80 max-h-80 overflow-y-auto z-10">
       <div className="p-4 text-center text-gray-600 font-bold">Your Cart</div>
@@ -35,17 +38,6 @@ const CartDropdown = ({ cart, onRemoveItem }) => {
       )}
     </div>
   );
-};
-CartDropdown.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.shape({
-      bookId: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-  onRemoveItem: PropTypes.func.isRequired,
 };
 
 export default CartDropdown;

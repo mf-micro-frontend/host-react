@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       federation({
         name: "host",
         exposes: {
-          "./GlobalContext": "./src/context/GlobalContext.jsx",
+          "./GlobalContext": "./src/context/GlobalContext.tsx",
         },
         remotes: {
           bookList: `${env.VITE_BOOK_LIST_APP_URL}/assets/remoteEntry.js`,
